@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_NAME: <TODO_DOCKERHUB_USER>/springuma
+  IMAGE_NAME: darchery/ips-p9-cicd-con-asistencia-ia
 
 jobs:
   build-and-push:
@@ -47,7 +47,7 @@ jobs:
 
       - name: Set image output
         id: set-image
-        run: echo "::set-output name=image::${{ env.IMAGE_NAME }}:${{ github.sha }}"
+        run: echo "image=${{ env.IMAGE_NAME }}:${{ github.sha }}" >> $GITHUB_OUTPUT
 
   deploy:
     needs: build-and-push
@@ -75,8 +75,8 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           IMAGE=${{ needs.build-and-push.outputs.image }}
-          # Replace placeholder in k8s/deployment.yaml
-          sed -i "s|<DOCKER_IMAGE_PLACEHOLDER>|${IMAGE}|g" k8s/deployment.yaml || true
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+          # Replace placeholder in deployment.yaml (repo root)
+          sed -i "s|<DOCKER_IMAGE_PLACEHOLDER>|${IMAGE}|g" deployment.yaml || true
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
           kubectl -n default rollout status deployment/springuma --timeout=120s

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springuma
+  labels:
+    app: springuma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springuma
+  template:
+    metadata:
+      labels:
+        app: springuma
+    spec:
+      containers:
+        - name: springuma
+          # TODO: Replace <DOCKERHUB_USER>/springuma:TAG with your image reference when using remote registry
+          image: darchery/ips-p9-cicd-con-asistencia-ia:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
