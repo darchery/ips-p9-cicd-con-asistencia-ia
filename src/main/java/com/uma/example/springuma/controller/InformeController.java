@@ -3,6 +3,8 @@ package com.uma.example.springuma.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +22,7 @@ public class InformeController {
 
     @Autowired
     private InformeService informeService;
+    private static final Logger logger = LoggerFactory.getLogger(InformeController.class);
 
     @GetMapping("/informe/{id}")
     public Informe getInforme(@PathVariable("id") Long id) {
@@ -37,7 +40,7 @@ public class InformeController {
             informeService.addInforme(informe);
             return ResponseEntity.status(201).build();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error saving informe: {}", informe, e);
             return ResponseEntity.internalServerError().body("El informe ya existe");
         }
     }
@@ -48,7 +51,7 @@ public class InformeController {
             informeService.removeInformeByID(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error deleting informe id {}", id, e);
             return ResponseEntity.internalServerError().body("Error al eliminar el informe");
         }
     }

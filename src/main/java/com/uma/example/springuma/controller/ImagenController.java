@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,15 +25,21 @@ public class ImagenController {
 
     @Autowired
     private ImagenService imagenService;
+    private static final Logger logger = LoggerFactory.getLogger(ImagenController.class);
 
     @GetMapping("/imagen/{id}")
     public ResponseEntity<?> downloadImage(@PathVariable long id) {
-        byte[] imageData = imagenService.downloadImage(id);
-        return ResponseEntity.ok()
-                .contentType(MediaType.valueOf(
-                        "image/png"
-                ))
-                .body(imageData);
+        try {
+            byte[] imageData = imagenService.downloadImage(id);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.valueOf(
+                            "image/png"
+                    ))
+                    .body(imageData);
+        } catch (IOException e) {
+            logger.error("Error downloading image id {}", id, e);
+            return ResponseEntity.internalServerError().body("Error al descargar la imagen: " + e.getMessage());
+        }
     }
 
     @GetMapping("/imagen/info/{id}")
@@ -44,8 +52,8 @@ public class ImagenController {
         try {
             return ResponseEntity.ok(imagenService.getNewPrediccion(id));
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().body("Error al realizar la prediccion" + e.getMessage());
+            logger.error("Error generating prediction for image id {}", id, e);
+            return ResponseEntity.internalServerError().body("Error al realizar la prediccion: " + e.getMessage());
         }
 
     }
@@ -68,7 +76,7 @@ public class ImagenController {
             imagenService.removeImagenByID(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error deleting image id {}", id, e);
             return ResponseEntity.internalServerError().body("Error al eliminar la imagen");
         }
     }

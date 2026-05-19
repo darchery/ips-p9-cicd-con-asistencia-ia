@@ -3,7 +3,7 @@
 ## Un informe (documento en pdf) que responda brevemente a estas cuestiones sobre los 8 puntos planteados
 
 ### 1. ¿Ves alguna inconsistencia u error en el fichero AGENTS.md? ¿Está claro su contenido?
- - En sí su contenido está bien, hace una presentación general de proyecto. Pero también ha destacado muchísimos a cambios a mejorar en el proyecto base, incluyéndolos en el AGENTS.md.
+- En sí su contenido está bien, hace una presentación general de proyecto. Pero también ha destacado muchísimos a cambios a mejorar en el proyecto base, incluyéndolos en el AGENTS.md.
 ### 2. Los cambios en el README, ¿son superficiales o ha hecho cambios profundos?
  - Ha hecho cambios superficiales, aclarando la url que redirige al SpringDoc y añadiendo información a modo de disclaimer sobre el AI Predictor(integración externa deshabilitada por defecto) y los Test resources(recordatorio para incluir lo necesarios para hacer funcionar la integraciones en CI). 
 ### 3. Haz un resumen a grosso de la respuesta de la IAG. ¿Sugiere muchos cambios? ¿Son todos aplicables o sólo algunos?
@@ -17,6 +17,27 @@
     6. docs: document predictor configuration and test resources 7) 
     7. ci: add GitHub Actions workflow (template)
 ### 4. Indica qué cambios has aceptado.
+ - He aceptado, todos menos el 3, 4 y  7. Este es el listado:
+ 1) ImageUtils: no silenciar excepciones
+   - Reescrito para usar try-with-resources y propagar IOException.
+   - Cierra correctamente Deflater/Inflater con end().
+   - Archivo modificado: src/main/java/com/uma/example/springuma/utils/ImageUtils.java
+ 2) Controllers: reemplazo de printStackTrace por SLF4J Logger
+   - Añadí LoggerFactory y logger en:
+     - ImagenController.java
+     - MedicoController.java
+     - PacienteController.java
+     - InformeController.java
+   - Sustituí llamadas a e.printStackTrace() por logger.error(...) con contexto.
+   - Reemplacé System.out.println(...) por logger.debug(...) o eliminé salidas innecesarias.
+ 3) ImagenService / InformeService: eliminar throws Exception innecesario y adaptar a IOException
+   - ImagenService.getNewPrediccion: dejó solo throws IOException (la llamada real está deshabilitada; mantenemos la firma compatible para cuando se habilite).
+   - InformeService: getNewPrediccion, addInforme y updateInforme ahora declaran solo throws IOException.
+   - downloadImage ahora declara throws IOException, y el controlador lo maneja.
+ 4) ImagenController.downloadImage ahora captura IOException y devuelve 500 con mensaje claro.
+   - Manejo de errores con logger.
+ 5) Eliminé prints de depuración comentados en ImagenService/InformeService y documenté que la integración externa está deshabilitada.
+
 ### 5. Igual que el punto 3: indica el número de cambios que se sugieren e indica cuáles has decidido aplicar.
 ### 6. Indica si el uso de la IAG te ha ayudado a mejorar los workflows de la práctica 7 e intenta cuantificar, si es factible, el tiempo que te habrías ahorrado respecto al desarrollo original de la misma.
 ### 7. Comprueba e indica si se han incluido las llamadas para incluir los badges en el fichero README.md

@@ -3,6 +3,8 @@ package com.uma.example.springuma.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +23,7 @@ public class PacienteController {
 
     @Autowired
     private PacienteService pacienteService;
+    private static final Logger logger = LoggerFactory.getLogger(PacienteController.class);
 
     @GetMapping("/paciente/{id}")
     public Paciente getPaciente(@PathVariable("id") Long id) {
@@ -48,7 +51,7 @@ public class PacienteController {
             pacienteService.updatePaciente(paciente);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error updating paciente: {}", paciente, e);
             return ResponseEntity.internalServerError().body("Error al actualizar el paciente ");
         }
     }
@@ -57,7 +60,7 @@ public class PacienteController {
     public ResponseEntity<?> deleteCuenta(@PathVariable("id") Long id) {
         try {
             Paciente paciente = pacienteService.getPaciente(id);
-            System.out.println(paciente);
+            logger.debug("Deleting paciente: {}", paciente);
             if (paciente != null) {
                 pacienteService.removePaciente(paciente);
                 return ResponseEntity.ok().build();

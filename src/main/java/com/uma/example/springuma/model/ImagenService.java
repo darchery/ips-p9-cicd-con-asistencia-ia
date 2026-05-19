@@ -24,16 +24,8 @@ public class ImagenService {
         return repositoryImagen.getReferenceById(id);
     }
 
-    public String getNewPrediccion(Long id) throws IOException, Exception {
-        /* API Deprecated
-        Map<String, Double> response = 
-        ImagenAPIPredictor.query(ImageUtils.decompressImage(repositoryImagen.getReferenceById(id).getFile_content()));
-        System.out.println("resp");
-        System.out.println( response);
-        double score_0 = response.get("LABEL_0");
-        double score_1 = response.get("LABEL_1");
-        System.out.println("resp");
-        System.out.println( response);*/
+    public String getNewPrediccion(Long id) throws IOException {
+        /* API Deprecated: external predictor is disabled by default. Keep simulated behaviour for tests. */
         double score_0 = Math.random();
         double score_1 = Math.random();
         String resulString;
@@ -78,7 +70,7 @@ public class ImagenService {
         return null;
     }
 
-    public byte[] downloadImage(long id) {
+    public byte[] downloadImage(long id) throws IOException {
         Imagen dbImageData = repositoryImagen.getReferenceById(id);
         byte[] images = ImageUtils.decompressImage(dbImageData.getFile_content());
         return images;

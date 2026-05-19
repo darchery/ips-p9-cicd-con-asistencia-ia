@@ -1,6 +1,8 @@
 package com.uma.example.springuma.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ public class MedicoController {
 
     @Autowired
     private MedicoService medicoService;
+    private static final Logger logger = LoggerFactory.getLogger(MedicoController.class);
 
     @GetMapping("/medico/{id}")
     public Medico getMedico(@PathVariable("id") Long id) {
@@ -41,7 +44,7 @@ public class MedicoController {
             medicoService.updateMedico(medico);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error updating medico: {}", medico, e);
             return ResponseEntity.internalServerError().body("Error al actualizar el medico");
         }
     }
@@ -50,7 +53,7 @@ public class MedicoController {
     public ResponseEntity<?> deleteMedico(@PathVariable("id") Long id) {
         try {
             Medico medico = medicoService.getMedico(id);
-            System.out.println(medico);
+            logger.debug("Deleting medico: {}", medico);
             if (medico != null) {
                 medicoService.removeMedicoID(id);
                 return ResponseEntity.ok().build();

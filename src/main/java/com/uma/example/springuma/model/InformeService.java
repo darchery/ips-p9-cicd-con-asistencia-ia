@@ -22,16 +22,17 @@ public class InformeService {
         return repositoryInforme.findById(id).orElse(null);
     }
 
-    public Informe addInforme(Informe informe) throws IOException, Exception {
+    public Informe addInforme(Informe informe) throws IOException {
         String neew_pred = getNewPrediccion(informe);
         //double neew_pred = Math.random();
-        System.out.println(neew_pred);
+        // Use logging instead of System.out
+        // logger not available here; controllers or services should log as needed. Keep minimal console output removed.
         informe.setPrediccion(((neew_pred)));
 
         return repositoryInforme.saveAndFlush(informe);
     }
 
-    public void updateInforme(Informe informe) throws IOException, Exception {
+    public void updateInforme(Informe informe) throws IOException {
         // Puedes implementar la lógica de actualización según tus necesidades
         // Aquí se muestra un ejemplo básico:
         Informe existingInforme = repositoryInforme.findById(informe.getId()).orElse(null);
@@ -54,7 +55,7 @@ public class InformeService {
         return repositoryInforme.findByImagenId(id);
     }
 
-    public String getNewPrediccion(Informe informe) throws IOException, Exception {
+    public String getNewPrediccion(Informe informe) throws IOException {
         /*Map<String, Double> response =  ImagenAPIPredictor
         .query(ImageUtils.decompressImage(repositoryImage.getReferenceById(informe.getImagen().getId())
         .getFile_content()));
