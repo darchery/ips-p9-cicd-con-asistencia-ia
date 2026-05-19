@@ -64,8 +64,8 @@ public class ImagenService {
         Imagen imagen = new Imagen();
         imagen.setNombre(file.getOriginalFilename());
         imagen.setFile_content(ImageUtils.compressImage(file.getBytes()));
-        // Validate paciente existence when an id is provided
-        if (paciente != null && paciente.getId() != null) {
+        // Validate paciente existence when an id is provided (id is primitive long)
+        if (paciente != null && paciente.getId() > 0) {
             // repositoryPaciente will be injected; if not found, throw IllegalArgumentException
             if (!repositoryPaciente.existsById(paciente.getId())) {
                 throw new IllegalArgumentException("Paciente with id " + paciente.getId() + " does not exist");
