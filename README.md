@@ -60,8 +60,9 @@ No external database required — H2 in-memory is used for tests.
 ./mvnw spring-boot:run
 ```
 
-API available at `http://localhost:8080`.  
-Swagger UI: `http://localhost:8080/swagger-ui.html`
+API available at `http://localhost:8080`.
+Swagger UI: `http://localhost:8080/swagger-ui.html` (older SpringDoc setups) or
+`http://localhost:8080/swagger-ui/index.html` (newer SpringDoc versions). If one URL 404s, try the other.
 
 ### Main endpoints
 
@@ -101,6 +102,22 @@ Swagger UI: `http://localhost:8080/swagger-ui.html`
 ```
 
 ---
+
+AI Predictor (optional)
+
+The project contains scaffolding to call an external model inference API for image prediction, but the integration is disabled by default and the service currently returns simulated results. To enable an external prediction service you should:
+
+- Provide an API token via an environment variable named `HUGGINGFACE_TOKEN` (or by configuring a property `huggingface.token` in your Spring configuration). Do NOT store secrets in the repository.
+- Update the predictor integration (see `src/main/java/com/uma/example/springuma/model/ImagenAPIPredictor.java` and `src/main/java/com/uma/example/springuma/model/ImagenService.java`) so the code uses the token and performs the external call. By default the service uses randomly generated scores for tests.
+
+Keep in mind enabling external calls introduces network dependencies and can make CI flaky unless tokens are supplied as protected secrets in the CI environment.
+
+---
+
+Test resources
+
+Integration tests depend on image resources under `src/test/resources` (for example `healthy.png` and `no_healthty.png`). Ensure these files are present when running `./mvnw verify` locally or in CI.
+
 
 ## CI/CD — GitHub Actions
 
