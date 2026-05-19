@@ -3,6 +3,7 @@
 ## Un informe (documento en pdf) que responda brevemente a estas cuestiones sobre los 8 puntos planteados
 
 ### 1. ¿Ves alguna inconsistencia u error en el fichero AGENTS.md? ¿Está claro su contenido?
+ - En sí su contenido está bien, hace una presentación general de proyecto. Pero también ha destacado muchísimos a cambios a mejorar en el proyecto base, incluyéndolos en el AGENTS.md.
 ### 2. Los cambios en el README, ¿son superficiales o ha hecho cambios profundos?
 ### 3. Haz un resumen a grosso de la respuesta de la IAG. ¿Sugiere muchos cambios? ¿Son todos aplicables o sólo algunos?
 ### 4. Indica qué cambios has aceptado.
