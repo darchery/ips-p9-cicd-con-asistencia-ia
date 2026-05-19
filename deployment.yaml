@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: springuma
-          # TODO: Replace <DOCKERHUB_USER>/springuma:TAG with your image reference when using remote registry
-          image: darchery/ips-p9-cicd-con-asistencia-ia:latest
+          # The workflow replaces <DOCKER_IMAGE_PLACEHOLDER> with the built image
+          image: <DOCKER_IMAGE_PLACEHOLDER>
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent

@@ -1,16 +1,10 @@
 # SpringUMA — Medical Records System
 
-<!-- TODO: Replace <YOUR_USER> and <YOUR_REPO> with your GitHub account details -->
-
-<!-- CI/CD Workflow badge (replace placeholders) -->
-[![CI/CD](https://github.com/<YOUR_USER>/<YOUR_REPO>/actions/workflows/ci.yml/badge.svg)](https://github.com/<YOUR_USER>/<YOUR_REPO>/actions/workflows/ci.yml)
-
-> ⚠️ Replace `<YOUR_USER>` and `<YOUR_REPO>` with your actual GitHub account details.
-
+[![CI/CD](https://github.com/darchery/ips-p9-cicd-con-asistencia-ia/actions/workflows/ci.yml/badge.svg)](https://github.com/darchery/ips-p9-cicd-con-asistencia-ia/actions/workflows/ci.yml)
 A Spring Boot REST API that models a small medical records system. Built as a practice project for the **Software Maintenance and Testing** course at the University of Málaga.
 
 ---
-
+nno
 ## Domain Model
 
 | Entity    | Description                                                             |
