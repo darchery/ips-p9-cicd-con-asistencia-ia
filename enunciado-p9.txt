@@ -1,0 +1,32 @@
+Objetivo
+El objetivo de la práctica es revisitar la práctica 7 (CD/CD de apps con GitHub Actions) con herramientas de IA generativa (IAG) partiendo de la clase que tuvimos el viernes pasado.
+
+Enunciado
+
+A partir del proyecto Spring Boot suministrado se propone abrirlo con un IDE asistido por IAG de vuestra elección, ya sea la versión gratuita de Windurf u otro similar (VS Code + Copilot, Antigravity, etc.), y abordar los siguientes apartados:
+
+    1. Analizar el proyecto para que genere un fichero AGENTS.md.
+    2. Revisar el README.md del proyecto
+    3. Incluir la guía de codificación de Java y que revise el código y que haga un informe al respecto. Revisarlo para determinar la viabilidad de hacer cambios.
+    4. A partir del punto anterior, si se decide abordar algunos aspectos de mejora del código, inicializar git en el proyecto e incluir la guía de Git para hacer los commits que se requieran.
+    5. Analizar el proyecto desde un punto de vista técnico para identificar los aspectos de mejora que plantee la herramienta y decidir cuáles se pueden abordar de forma inmediata.
+    6. Plantear el workflow de GitHub de la práctica 7 usando los requisitos planteados en la misma para que la IAG muestre las posibles alternativas. En este sentido, prestar atención a cuál será la forma más conveniente de incluir un workflow para pruebas.
+    7. Actualizar los badges del fichero README.md con los workflows desarrollados.
+    8. Crear un repositorio en GitHub y alojar en él el proyecto para verificar el funcionamiento de los workflows
+
+Entregable
+
+Un informe (documento en pdf) que responda brevemente a estas cuestiones sobre los 8 puntos planteados:
+
+    1. ¿Ves alguna inconsistencia u error en el fichero AGENTS.md? ¿Está claro su contenido?
+    2. Los cambios en el README, ¿son superficiales o ha hecho cambios profundos?
+    3. Haz un resumen a grosso de la respuesta de la IAG. ¿Sugiere muchos cambios? ¿Son todos aplicables o sólo algunos?
+    4. Indica qué cambios has aceptado.
+    5. Igual que el punto 3: indica el número de cambios que se sugieren e indica cuáles has decidido aplicar.
+    6. Indica si el uso de la IAG te ha ayudado a mejorar los workflows de la práctica 7 e intenta cuantificar, si es factible, el tiempo que te habrías ahorrado respecto al desarrollo original de la misma.
+    7. Comprueba e indica si se han incluido las llamadas para incluir los badges en el fichero README.md
+    8. Comprueba si los workflows se ejecutan de forma correcta y, si no, si usando la IAG enviándole los errores producidos es capaz de repararlos.
+
+Adicionalmente, indica qué herramienta has usado y tu valoración al aplicarla al ejercicio.
+
+Entrega también el informe generado por la herramienta en el punto 5.
