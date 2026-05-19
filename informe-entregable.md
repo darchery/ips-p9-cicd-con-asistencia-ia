@@ -14,7 +14,7 @@
     3. chore(config): read huggingface token from env/property
     4. Inyectar RepositoryPaciente en ImagenService y comprobar existencia cuando se reciba un paciente con id.
     5. style(logging): replace System.out with logger
-    6. docs: document predictor configuration and test resources 7) 
+    6. docs: document predictor configuration and test resources
     7. ci: add GitHub Actions workflow (template)
 ### 4. Indica qué cambios has aceptado.
  - He aceptado, todos menos el 3, 4 y  7. Este es el listado:
@@ -39,6 +39,12 @@
  5) Eliminé prints de depuración comentados en ImagenService/InformeService y documenté que la integración externa está deshabilitada.
 
 ### 5. Igual que el punto 3: indica el número de cambios que se sugieren e indica cuáles has decidido aplicar.
+ - Cambios sugeridos
+    1. Validar existencia de Paciente en uploadImage
+    2. Refactorizar ImagenAPIPredictor para manejo de errores específicos
+    3. Añadir formateador y checks (Checkstyle / google-java-format)
+    4. Añadir workflow GitHub Actions (CI)
+ - Voy a aplicar los puntos 1 y 2.
 ### 6. Indica si el uso de la IAG te ha ayudado a mejorar los workflows de la práctica 7 e intenta cuantificar, si es factible, el tiempo que te habrías ahorrado respecto al desarrollo original de la misma.
 ### 7. Comprueba e indica si se han incluido las llamadas para incluir los badges en el fichero README.md
 ### 8. Comprueba si los workflows se ejecutan de forma correcta y, si no, si usando la IAG enviándole los errores producidos es capaz de repararlos.

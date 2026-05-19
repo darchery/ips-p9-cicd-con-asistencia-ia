@@ -23,7 +23,7 @@ public class ImagenAPIPredictor {
     // @TODO: replace USE_TOKEN_HERE with your token
     private static final String TOKEN = "Bearer USE_TOKEN_HERE";
 
-    public static Map<String, Double> query(byte[] file_data) throws IOException, Exception {
+    public static Map<String, Double> query(byte[] file_data) throws IOException, ApiException {
 
         byte[] data = file_data;
         try (CloseableHttpClient client = HttpClients.createDefault()) {
@@ -34,29 +34,39 @@ public class ImagenAPIPredictor {
             HttpResponse response = client.execute(request);
             String jsonResponse = EntityUtils.toString(response.getEntity());
             return processResponse(jsonResponse);
+        } catch (IOException e) {
+            // I/O level problems while performing request
+            throw e;
         } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            // Wrap other exceptions as ApiException to provide context
+            throw new ApiException("Failed to query prediction API", e);
         }
     }
 
-    private static Map<String, Double> processResponse(String jsonResponse) throws Exception {
+    private static Map<String, Double> processResponse(String jsonResponse) throws IOException, ApiException {
         ObjectMapper mapper = new ObjectMapper();
+        if (jsonResponse == null) {
+            throw new ApiException("Empty response from prediction API");
+        }
         if (jsonResponse.trim().startsWith("[")) {
             List<Map<String, Object>> responseList = mapper.readValue(jsonResponse, new TypeReference<List<Map<String, Object>>>() {
             });
             Map<String, Double> resultMap = new HashMap<>();
             for (Map<String, Object> entry : responseList) {
-                resultMap.put((String) entry.get("label"), (Double) entry.get("score"));
-
+                Object label = entry.get("label");
+                Object score = entry.get("score");
+                if (label instanceof String && score instanceof Number) {
+                    resultMap.put((String) label, ((Number) score).doubleValue());
+                }
             }
             return resultMap;
         } else {
             Map<String, Object> responseMap = mapper.readValue(jsonResponse, new TypeReference<Map<String, Object>>() {
             });
             if (responseMap.containsKey("error")) {
-                throw new Exception("Error from API: " + responseMap.get("error"));
+                throw new ApiException("Error from API: " + responseMap.get("error"));
             } else {
-                throw new Exception("Unexpected response format: " + jsonResponse);
+                throw new ApiException("Unexpected response format: " + jsonResponse);
             }
         }
     }

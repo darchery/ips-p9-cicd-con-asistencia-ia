@@ -16,6 +16,9 @@ public class ImagenService {
     @Autowired
     private RepositoryImagen repositoryImagen;
 
+    @Autowired
+    private RepositoryPaciente repositoryPaciente;
+
     public List<Imagen> getAllImagenes() {
         return repositoryImagen.findAll();
     }
@@ -61,13 +64,20 @@ public class ImagenService {
         Imagen imagen = new Imagen();
         imagen.setNombre(file.getOriginalFilename());
         imagen.setFile_content(ImageUtils.compressImage(file.getBytes()));
+        // Validate paciente existence when an id is provided
+        if (paciente != null && paciente.getId() != null) {
+            // repositoryPaciente will be injected; if not found, throw IllegalArgumentException
+            if (!repositoryPaciente.existsById(paciente.getId())) {
+                throw new IllegalArgumentException("Paciente with id " + paciente.getId() + " does not exist");
+            }
+        }
         imagen.setPaciente(paciente);
         imagen.setFecha(Calendar.getInstance());
         imagen = repositoryImagen.saveAndFlush(imagen);
         if (imagen != null) {
             return "{\"response\" : \"file uploaded successfully : " + file.getOriginalFilename() + "\"}";
         }
-        return null;
+        return "{\"response\" : \"file upload failed\"}";
     }
 
     public byte[] downloadImage(long id) throws IOException {
