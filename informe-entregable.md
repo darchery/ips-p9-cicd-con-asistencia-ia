@@ -55,4 +55,3 @@
 Adicionalmente, indica qué herramienta has usado y tu valoración al aplicarla al ejercicio.
   - He usado la aplicación de terminal de código libre OpenCode, usando GPT-5-mini. La verdad que he tenido bastante cuidado con los prompts y he usado menos del 40% de uso diario. Lo único es que este modelo es muy "verboso", se explica demasiado, a veces innecesario. Yo estoy acostumbrado a usar Claude Haiku 3.5(que viene con github education).
   
-Confirmo que el informe está completo y corresponde a los cambios aplicados en el repositorio.
