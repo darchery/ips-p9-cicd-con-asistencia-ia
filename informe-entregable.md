@@ -46,9 +46,13 @@
     4. Añadir workflow GitHub Actions (CI)
  - Voy a aplicar los puntos 1 y 2.
 ### 6. Indica si el uso de la IAG te ha ayudado a mejorar los workflows de la práctica 7 e intenta cuantificar, si es factible, el tiempo que te habrías ahorrado respecto al desarrollo original de la misma.
+ - No tanto a mejorar(porque no sigue muy buenas prácticas en algunos archivos), si no a automatizar  el procesos de creación de los workflows con github actions. Y evidentemente en tiempo físico que se tarda en realizar estos cambios es mucho mayor al que se tarda con este proceso usando IAG.
 ### 7. Comprueba e indica si se han incluido las llamadas para incluir los badges en el fichero README.md
+ - Si, se ha incluido correctamente
 ### 8. Comprueba si los workflows se ejecutan de forma correcta y, si no, si usando la IAG enviándole los errores producidos es capaz de repararlos.
+ - Los worksflows se ejecutan de forma correcta. He tenido algunos de problemas de configuración en los .yml para que detecte las varibales secrets de mi token y usuario de hub docker, pero ha conseguido solucionarlo. También he tenido bastantes problemas a la hora de configurar el deploy de kubernetes, pero tras varios intentos ha podido solucionarlos.
 
 Adicionalmente, indica qué herramienta has usado y tu valoración al aplicarla al ejercicio.
-
-Entrega también el informe generado por la herramienta en el punto 5.
+  - He usado la aplicación de terminal de código libre OpenCode, usando GPT-5-mini. La verdad que he tenido bastante cuidado con los prompts y he usado menos del 40% de uso diario. Lo único es que este modelo es muy "verboso", se explica demasiado, a veces innecesario. Yo estoy acostumbrado a usar Claude Haiku 3.5(que viene con github education).
+  
+Confirmo que el informe está completo y corresponde a los cambios aplicados en el repositorio.
