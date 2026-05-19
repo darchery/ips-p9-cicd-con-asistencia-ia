@@ -7,6 +7,15 @@
 ### 2. Los cambios en el README, ¿son superficiales o ha hecho cambios profundos?
  - Ha hecho cambios superficiales, aclarando la url que redirige al SpringDoc y añadiendo información a modo de disclaimer sobre el AI Predictor(integración externa deshabilitada por defecto) y los Test resources(recordatorio para incluir lo necesarios para hacer funcionar la integraciones en CI). 
 ### 3. Haz un resumen a grosso de la respuesta de la IAG. ¿Sugiere muchos cambios? ¿Son todos aplicables o sólo algunos?
+ - Los cambios que ha aplicado son razonables, parches pequeños y atómicos. Sugiere 7 cambios(bastantes pero pequeños). Y prácticamente todos son aplicables, los que están relacionados con el uso de la API para hacer la predicción no los voy  aplicar.
+ - Lista de cambios sugeridos
+    1. style(controller): use SLF4J logger instead of printStackTrace
+    2. fix(utils): propagate IO exceptions from ImageUtils
+    3. chore(config): read huggingface token from env/property
+    4. Inyectar RepositoryPaciente en ImagenService y comprobar existencia cuando se reciba un paciente con id.
+    5. style(logging): replace System.out with logger
+    6. docs: document predictor configuration and test resources 7) 
+    7. ci: add GitHub Actions workflow (template)
 ### 4. Indica qué cambios has aceptado.
 ### 5. Igual que el punto 3: indica el número de cambios que se sugieren e indica cuáles has decidido aplicar.
 ### 6. Indica si el uso de la IAG te ha ayudado a mejorar los workflows de la práctica 7 e intenta cuantificar, si es factible, el tiempo que te habrías ahorrado respecto al desarrollo original de la misma.
