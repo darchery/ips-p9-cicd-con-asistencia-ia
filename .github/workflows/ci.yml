@@ -55,7 +55,8 @@ jobs:
   deploy:
     needs: build-and-push
     # This job uses a self-hosted runner that has access to your local k8s cluster
-    runs-on: [self-hosted, linux, k8s-deployer] # TODO: ensure you have a self-hosted runner with label 'k8s-deployer'
+    runs-on: self-hosted
+    #runs-on: [self-hosted, linux, k8s-deployer] # TODO: ensure you have a self-hosted runner with label 'k8s-deployer'
     env:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
